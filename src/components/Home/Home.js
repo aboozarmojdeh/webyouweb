@@ -45,22 +45,26 @@ import InterestList from "../InterestList/InterestList";
 // import Col from 'react-bootstrap/Col';
 import { FaRegNewspaper } from "react-icons/fa";
 
-import {setSearchField, requestCats} from '../../actions';
+import {setSearchField,  requestQuotes,requestCats} from '../../actions';
 
 
 const mapStateToProps=state=>{
   return{
     searchField:state.searchCats.searchField,
     cats:state.requestCats.cats,
-    isPending:state.requestCats.isPending,
-    error:state.requestCats.error
+    isPendingCats:state.requestCats.isPendingQuotes,
+    errorCats:state.requestCats.errorQuotes,
+    quotes:state.requestQuotes.quotes,
+    isPendingQuotes:state.requestQuotes.isPendingQuotes,
+    errorQuotes:state.requestQuotes.errorQuotes
   }
 }
 
 const mapDispatchToProps=(dispatch)=>{
   return {
     onSearchChange:(event)=>dispatch(setSearchField(event.target.value)),
-    onRequestCats:()=>dispatch(requestCats())
+    onRequestCats:()=>dispatch(requestCats()),
+    onRequestQuotes:()=>dispatch(requestQuotes())
   }
 }
 
@@ -82,7 +86,6 @@ class Home extends Component {
       nytNews: [],
       localNews: [],
       localSportNews:[],
-      quotes: [],
       ipInfo: {
         city: "",
         country: "",
@@ -122,7 +125,7 @@ class Home extends Component {
       ipInfoObj.region = region;
 
       this.setState({
-        ipInfo: ipInfoObj,
+        ipInfo: ipInfoObj
       });
 
       // console.log('data',data)
@@ -365,15 +368,17 @@ async getLocalSportNews() {
     this.getIPinfo();
     // this.getLocalNews()
     this.props.onRequestCats();
+    this.props.onRequestQuotes();
+    
     ////////////////////jsonplaceholder fetch////////////////////////
     // fetch("https://jsonplaceholder.typicode.com/users")
     //   .then((response) => response.json())
     //   .then((data) => this.setState({ cats: data }));
 
     ////////////////////Quotes fetch////////////////////////
-    fetch(`https://type.fit/api/quotes`)
-      .then((response) => response.json())
-      .then((data) => this.setState({ quotes: data }));
+  //   fetch(`https://type.fit/api/quotes`)
+  //     .then((response) => response.json())
+  //     .then((data) => this.setState({ quotes: data }));
   }
 
   // onSearchChange = (event) => {
@@ -385,7 +390,7 @@ async getLocalSportNews() {
   render() {
     ////////////////ITEM TEST for Searching the subjects////////////////////////
 
-    const {searchField,onSearchChange,cats,isPending}=this.props;
+    const {searchField,onSearchChange,cats,isPendingCats,quotes,isPendingQuotes}=this.props;
     // const itemsTest = [
     //   {
     //     name: "Local News",
@@ -413,10 +418,11 @@ async getLocalSportNews() {
     const filteredLocalSportNews = this.state.localSportNews.slice(0, 6);
     //////////
     let randomNumber = Math.floor(Math.random() * 1644);
-    const randQuote = this.state.quotes[randomNumber];
+    const randQuote = quotes[randomNumber];
+    // console.log("randQuote",randQuote)
     /////////////
 
-    if (!this.state.quotes.length || isPending) {
+    if ( !quotes.length || isPendingCats) {
       return (
         <div>
           {/* <Navbartop /> */}

@@ -2,7 +2,10 @@ import {
     CHANGE_SEARCH_FIELD,
     REQUEST_CATS_PENDING,
     REQUEST_CATS_SUCCESS,
-    REQUEST_CATS_FAILED
+    REQUEST_CATS_FAILED,
+    REQUEST_QUOTES_PENDING,
+    REQUEST_QUOTES_SUCCESS,
+    REQUEST_QUOTES_FAILED,
 
 } from './constants';
 
@@ -24,22 +27,48 @@ export const searchCats = (state = initialStateSearch, action = {}) => {
 
 const initialStateCats = {
     cats: [],
-    error: "",
-    isPending: false
+    errorCats: "",
+    isPendingCats: false
 }
 
 export const requestCats = (state = initialStateCats, action = {}) => {
     switch (action.type) {
         case REQUEST_CATS_PENDING:
-            return { ...state, isPending: true }
+            return { ...state, isPendingCats: true }
 
         case REQUEST_CATS_SUCCESS:
-            return { ...state, cats: action.payload, isPending: false }
+            return { ...state, cats: action.payload, isPendingCats: false }
 
         case REQUEST_CATS_FAILED:
-            return { ...state, error: action.payload, isPending: false }
+            return { ...state, errorCats: action.payload, isPendingCats: false }
 
         default:
             return state;
     }
+}
+
+
+const initialStateQuotes={
+    quotes:[],
+    errorQuotes: "",
+    isPendingQuotes: false
+}
+
+
+export const requestQuotes=(state=initialStateQuotes,action={})=>{
+    
+        switch (action.type) {
+            case REQUEST_QUOTES_PENDING:
+                return { ...state, isPendingQuotes: true }
+    
+            case REQUEST_QUOTES_SUCCESS:
+                return { ...state, quotes: action.payload, isPendingQuotes: false }
+    
+            case REQUEST_QUOTES_FAILED:
+                return { ...state, errorQuotes: action.payload, isPendingQuotes: false }
+    
+            default:
+                return state;
+        }
+    
 }

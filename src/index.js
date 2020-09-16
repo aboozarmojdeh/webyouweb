@@ -8,9 +8,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
-import {searchCats, requestCats} from './reducers';
+import {searchCats, requestQuotes,requestCats} from './reducers';
 const logger=createLogger();
-const rootReducers=combineReducers({searchCats, requestCats})
+const rootReducers=combineReducers({searchCats, requestQuotes,requestCats})
 const store=createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
 
 
