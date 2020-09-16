@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import {connect} from 'react-redux';
+import axios from 'axios';
 // import Card from 'react-bootstrap/Card';
 import "./Home.css";
 import Navbartop from "../Navbar/Navbartop";
@@ -44,17 +45,22 @@ import InterestList from "../InterestList/InterestList";
 // import Col from 'react-bootstrap/Col';
 import { FaRegNewspaper } from "react-icons/fa";
 
-import {setSearchField} from '../../actions';
+import {setSearchField, requestCats} from '../../actions';
+
 
 const mapStateToProps=state=>{
   return{
-    searchField:state.searchField
+    searchField:state.searchCats.searchField,
+    cats:state.requestCats.cats,
+    isPending:state.requestCats.isPending,
+    error:state.requestCats.error
   }
 }
 
 const mapDispatchToProps=(dispatch)=>{
   return {
-    onSearchChange:(event)=>dispatch(setSearchField(event.target.value))
+    onSearchChange:(event)=>dispatch(setSearchField(event.target.value)),
+    onRequestCats:()=>dispatch(requestCats())
   }
 }
 
@@ -71,7 +77,6 @@ class Home extends Component {
       weatherCity: "",
       weatherCountry: "",
       weatherForecastList: [],
-      cats: [],
       movies: [],
       tvShows: [],
       nytNews: [],
@@ -359,11 +364,11 @@ async getLocalSportNews() {
     // this.getLocation();
     this.getIPinfo();
     // this.getLocalNews()
-
+    this.props.onRequestCats();
     ////////////////////jsonplaceholder fetch////////////////////////
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((data) => this.setState({ cats: data }));
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then((response) => response.json())
+    //   .then((data) => this.setState({ cats: data }));
 
     ////////////////////Quotes fetch////////////////////////
     fetch(`https://type.fit/api/quotes`)
@@ -380,7 +385,7 @@ async getLocalSportNews() {
   render() {
     ////////////////ITEM TEST for Searching the subjects////////////////////////
 
-    const {searchField,onSearchChange}=this.props;
+    const {searchField,onSearchChange,cats,isPending}=this.props;
     // const itemsTest = [
     //   {
     //     name: "Local News",
@@ -390,7 +395,7 @@ async getLocalSportNews() {
     //   },
     // ];
     /////////////////////////////////////////
-    const filteredCats = this.state.cats.filter((cat) => {
+    const filteredCats = cats.filter((cat) => {
       return cat.name
         .toLowerCase()
         .includes(searchField.toLowerCase());
@@ -411,7 +416,7 @@ async getLocalSportNews() {
     const randQuote = this.state.quotes[randomNumber];
     /////////////
 
-    if (!this.state.quotes.length) {
+    if (!this.state.quotes.length || isPending) {
       return (
         <div>
           {/* <Navbartop /> */}

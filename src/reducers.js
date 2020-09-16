@@ -22,7 +22,7 @@ export const searchCats = (state = initialStateSearch, action = {}) => {
     }
 }
 
-const initialStateCats={
+const initialStateCats = {
     cats: [],
     error: "",
     isPending: false

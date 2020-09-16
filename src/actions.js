@@ -8,6 +8,7 @@ import {
 
 import axios from 'axios';
 
+
 export const setSearchField = (text) => {
     // console.log(text)
     return {
@@ -18,11 +19,13 @@ export const setSearchField = (text) => {
 }
 
 
-export const requestCats = (dispatch) => {
+export const requestCats = ()=>(dispatch) => {
     dispatch({ type: REQUEST_CATS_PENDING });
     axios.get("https://jsonplaceholder.typicode.com/users")
-        .then(data => dispatch({ type: REQUEST_CATS_SUCCESS, payload: data }))
+        .then(axiosData => dispatch({ type: REQUEST_CATS_SUCCESS, payload: axiosData.data }))
+        // console.log(axiosData) before proceeding 
         .catch(error => dispatch({ type: REQUEST_CATS_FAILED, payload: error }
-        ))
+        )   
+        )
 
 }
