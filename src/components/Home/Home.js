@@ -381,14 +381,14 @@ async getLocalSportNews() {
     ////////////////ITEM TEST for Searching the subjects////////////////////////
 
     const {searchField,onSearchChange}=this.props;
-    const itemsTest = [
-      {
-        name: "Local News",
-      },
-      {
-        name: "Movies",
-      },
-    ];
+    // const itemsTest = [
+    //   {
+    //     name: "Local News",
+    //   },
+    //   {
+    //     name: "Movies",
+    //   },
+    // ];
     /////////////////////////////////////////
     const filteredCats = this.state.cats.filter((cat) => {
       return cat.name
