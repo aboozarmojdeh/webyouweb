@@ -15,11 +15,11 @@ const store=createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     
     <App store={store}/>
     
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 

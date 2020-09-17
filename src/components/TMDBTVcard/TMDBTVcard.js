@@ -59,13 +59,13 @@ const TMDBTVcard = (props) => {
 
       <div className="card hovereffect" style={{ backgroundColor: randColor }}>
         {props.tvShowPosterPath ?
-          <a href={tvShowLink} target='_blank' rel="noopener noreferrer"><img class="card-img-top"
+          <a href={tvShowLink} target='_blank' rel="noopener noreferrer"><img className="card-img-top"
 
             src={`http://image.tmdb.org/t/p/w300${props.tvShowPosterPath}`}
 
             alt={props.tvShowTitle} /></a>
           :
-          <img class="card-img-top"
+          <img className="card-img-top"
 
             src={altImage}
 
@@ -90,7 +90,7 @@ const TMDBTVcard = (props) => {
 
           {/* <li></li> */}
           {/* </ul> */}
-          <a href={tvShowLink} class="card-link card-text-responsive-series" target='_blank' rel="noopener noreferrer" style={{ color: contrast(randColor) }}>More info ...</a>
+          <a href={tvShowLink} className="card-link card-text-responsive-series" target='_blank' rel="noopener noreferrer" style={{ color: contrast(randColor) }}>More info ...</a>
           {/* <br />
             <h6>Release Date: {props.movieDate}</h6>
             <h3>Overview</h3>
@@ -107,7 +107,7 @@ const TMDBTVcard = (props) => {
           {/* </div> */}
         </div>
 
-        <div class="card-footer" style={{ color: contrast(randColor), fontSize: "16px", padding: "2px", textAlign: "center" }}>
+        <div className="card-footer" style={{ color: contrast(randColor), fontSize: "16px", padding: "2px", textAlign: "center" }}>
           <small >Release Date: {props.tvShowDate}</small>
         </div>
         {/* /////////////////// */}

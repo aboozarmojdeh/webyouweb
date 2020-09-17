@@ -58,26 +58,26 @@ const Lnewscard = (props) => {
   return (
 
 
-    <div class="card" style={{ backgroundColor: randColor }}>
+    <div className="card" style={{ backgroundColor: randColor }}>
       {props.newsImage ?
-        <img class="card-img-top"
+        <img className="card-img-top"
 
           src={props.newsImage}
 
           alt="Current Img" />
         :
-        <img class="card-img-top"
+        <img className="card-img-top"
 
           src={altImage}
 
           alt="" />}
 
-      <div class="card-body card-text-responsive" style={{ color: contrast(randColor) }}>
-        <p class="card-title" >{props.newsTitle}</p>
+      <div className="card-body card-text-responsive" style={{ color: contrast(randColor) }}>
+        <p className="card-title" >{props.newsTitle}</p>
 
-        <a href={props.newsURL} class="card-link" target='_blank' rel="noopener noreferrer" style={{ color: contrast(randColor) }}>More ...</a>
+        <a href={props.newsURL} className="card-link" target='_blank' rel="noopener noreferrer" style={{ color: contrast(randColor) }}>More ...</a>
       </div>
-      <div class="card-footer" style={{ color: contrast(randColor), fontSize: "14px", padding: "2px", textAlign: "center" }}>
+      <div className="card-footer" style={{ color: contrast(randColor), fontSize: "14px", padding: "2px", textAlign: "center" }}>
         <small >{dateMaker(newsDate)}</small>
       </div>
 
